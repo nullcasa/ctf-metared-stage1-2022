@@ -91,7 +91,9 @@ I researched `dnscat` and found that the first 9 bytes of each transmission are 
 
 I ultimately overcomplicated this one, and messed about with various `scapy` based python scripts to splice the various `dnscat` messages together and decode the result. In the end I just needed to decode the one message that was notably longer than the others.
 
+<a href="./media/my-secret-tunnel.png">
 ![Wireshark Screenshot](/media/my-secret-tunnel.png)
+</a>
 
     $ echo 5a6d78685a337445626c4e6664485675626a4d7a4d.3278734d5446755a32646e66516f3d0a | xxd -r -p
     ZmxhZ3tEblNfdHVubjMzM2xsMTFuZ2dnfQo=
