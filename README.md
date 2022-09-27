@@ -122,3 +122,39 @@ Searching for the phrase `Omelette du fromage` brought me to an episode of Dexte
 The challenge provides a URL to a domain with a file that simply contains the text `Nothing`. After poking around a bit at headers and cookies, I started on enumeration and checked the classic `/robots.txt`. Sure enough, this led me to `/sup3rsecr3T.txt` which had the flag in a `flag` response header.
 
     flag{Header_HTTP_Rulessss}
+
+# Prog
+
+## Calculator
+
+The challenge provides a domain and port to connect to with `nc`. Upon connection, you are prompted to solve some simple math problems, but the timeout is too quick to reasonably do so manually. I wrote a script to evaluate each of the provided expressions.
+
+```python
+#!/usr/bin/env python3
+from pwn import *
+
+
+# the connection is terminated before a final newline, this prints the buffer contents
+context.log_level = "debug"
+
+conn = remote("calculator.ctf.cert.unlp.edu.ar", 15002)
+
+conn.recvuntil(b":\n")
+
+while True:
+    line = conn.recvline().strip()
+
+    try:
+        result = str(eval(line)).encode("utf-8")
+    except Exception:
+        print("COMPLETE")
+        while(True):
+            print(line)
+            line = conn.recvline()
+
+    conn.sendline(result)
+
+    print(conn.recvline())
+```
+
+I didn't write down the flag :p
