@@ -51,7 +51,7 @@ Which extracted `alittlemore.zip`. This was cracked in the same manner, but with
 
     gz
 
-What turned out to be the final archive, `flag.zip`, was more resistant to wordlists and simple brute forcing. Eventually I became curious about the contents, and searching for `pkzip.ps.gz` revealed that it was a part of `pkcrack`, a zip cracking utility that requires a known plaintext file be present in the encrypted archive. Since `pkzip.ps.gz` is included in the archive, and available from `pkcrack` itself, I had everything I needed for the final step.
+What turned out to be the final archive, `flag.zip`, was more resistant to wordlists and simple brute forcing. Eventually I became curious about the contents, and searching for `pkzip.ps.gz` revealed that it was a part of `pkcrack`, a zip cracking utility that requires a known plaintext file be present in the encrypted archive. Since `pkzip.ps.gz` is included in the encrypted `flag.zip`, and available unencrypted from `pkcrack` itself, I had everything I needed for the final step.
 
 In preparation for running `pkcrack` I downloaded `pkzip.ps.gz` and zipped it up in a new unencrypted zipfile, making sure the compression mode matched afterwards with `unzip -v flag.zip` and `unzip -v new.zip`.
 
@@ -90,6 +90,8 @@ The challenge provides `file.pcapng`. Opened in `wireshark`, it contains some DN
 I researched `dnscat` and found that the first 9 bytes of each transmission are not part of the payload, the rest is the hex encoded message.
 
 I ultimately overcomplicated this one, and messed about with various `scapy` based python scripts to splice the various `dnscat` messages together and decode the result. In the end I just needed to decode the one message that was notably longer than the others.
+
+![Wireshark Screenshot](/media/my-secret-tunnel.png)
 
     $ echo 5a6d78685a337445626c4e6664485675626a4d7a4d.3278734d5446755a32646e66516f3d0a | xxd -r -p
     ZmxhZ3tEblNfdHVubjMzM2xsMTFuZ2dnfQo=
