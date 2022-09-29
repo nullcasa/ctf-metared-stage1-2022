@@ -117,7 +117,7 @@ Searching for the phrase `Omelette du fromage` brought me to an episode of Dexte
 
 # Web
 
-## Basic
+## Basics
 
 The challenge provides a URL to a domain with a file that simply contains the text `Nothing`. After poking around a bit at headers and cookies, I started on enumeration and checked the classic `/robots.txt`. Sure enough, this led me to `/sup3rsecr3T.txt` which had the flag in a `flag` response header.
 
